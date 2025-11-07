@@ -1,0 +1,27 @@
+syntax = "v1"
+
+type (
+	FocusRequest {
+		Id int `form:"id"`
+	}
+	Focus {
+		Id       int    `json:"id"`
+		Title    string `json:"title"`
+		Pic      string `json:"pic"`
+		Link     string `json:"link"`
+		Position int    `json:"position"`
+	}
+)
+
+@server (
+	group:  "focus"
+	prefix: "/api/focus"
+)
+service zerogorm-api {
+	@handler GetFocus
+	get / returns (CommonResponse)
+
+	@handler GetFocusById
+	get /oneFocus (FocusRequest) returns (CommonResponse)
+}
+
