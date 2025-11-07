@@ -8,6 +8,7 @@ import (
 
 	"zerogorm/internal/svc"
 	"zerogorm/internal/types"
+	"zerogorm/model/gorm"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -28,6 +29,20 @@ func NewGetFocusByIdLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetF
 
 func (l *GetFocusByIdLogic) GetFocusById(req *types.FocusRequest) (resp *types.CommonResponse, err error) {
 	// todo: add your logic here and delete this line
-
-	return
+	id := req.Id
+	focus := gorm.Focus{}
+	err = l.svcCtx.DB.Where("id = ?", id).Find(&focus).Error
+	if err != nil {
+		return &types.CommonResponse{
+			Code:    500,
+			Message: "error",
+			Success: false,
+		}, err
+	}
+	return &types.CommonResponse{
+		Code:    200,
+		Message: "success",
+		Data:    focus,
+		Success: true,
+	}, nil
 }

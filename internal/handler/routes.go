@@ -6,6 +6,7 @@ package handler
 import (
 	"net/http"
 
+	article "zerogorm/internal/handler/article"
 	focus "zerogorm/internal/handler/focus"
 	"zerogorm/internal/svc"
 
@@ -13,6 +14,17 @@ import (
 )
 
 func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodGet,
+				Path:    "/:id",
+				Handler: article.GetArticleByIdHandler(serverCtx),
+			},
+		},
+		rest.WithPrefix("/api/article"),
+	)
+
 	server.AddRoutes(
 		[]rest.Route{
 			{

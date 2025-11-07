@@ -3,6 +3,18 @@
 
 package types
 
+type Article struct {
+	Id          int    `json:"id"`
+	Title       string `json:"title"`
+	Content     string `json:"content"`
+	Description string `json:"description"`
+	Picture     string `json:"picture"`
+}
+
+type ArticleRequest struct {
+	Id int `path:"id"`
+}
+
 type CommonResponse struct {
 	Code    int         `json:"code"`
 	Message string      `json:"message"`

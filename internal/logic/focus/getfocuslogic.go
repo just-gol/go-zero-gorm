@@ -8,6 +8,7 @@ import (
 
 	"zerogorm/internal/svc"
 	"zerogorm/internal/types"
+	"zerogorm/model/gorm"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -27,7 +28,11 @@ func NewGetFocusLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetFocus
 }
 
 func (l *GetFocusLogic) GetFocus() (resp *types.CommonResponse, err error) {
-	// todo: add your logic here and delete this line
-
-	return
+	focusList := []gorm.Focus{}
+	l.svcCtx.DB.Find(&focusList)
+	return &types.CommonResponse{
+		Code:    0,
+		Message: "success",
+		Data:    focusList,
+	}, nil
 }

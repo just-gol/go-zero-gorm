@@ -8,3 +8,4 @@ type CommonResponse {
 }
 
 import "./api/focus.api"
+import "./api/article.api"
