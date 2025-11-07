@@ -3,6 +3,12 @@
 
 package types
 
+type AddUserRequest struct {
+	Username string `json:"username"`
+	Age      int    `json:"age"`
+	Email    string `json:"email"`
+}
+
 type Article struct {
 	Id          int    `json:"id"`
 	Title       string `json:"title"`
@@ -31,5 +37,23 @@ type Focus struct {
 }
 
 type FocusRequest struct {
+	Id int `form:"id"`
+}
+
+type UpdateUserRequest struct {
+	Id       int    `json:"id"`
+	Username string `json:"username,optional"`
+	Age      int    `json:"age,optional"`
+	Email    string `json:"email,optional"`
+}
+
+type User struct {
+	Id       int    `json:"id"`
+	Username string `json:"username"`
+	Age      int    `json:"age"`
+	Email    string `json:"email"`
+}
+
+type UserRequest struct {
 	Id int `form:"id"`
 }

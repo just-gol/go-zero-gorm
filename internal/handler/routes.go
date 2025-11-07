@@ -8,6 +8,7 @@ import (
 
 	article "zerogorm/internal/handler/article"
 	focus "zerogorm/internal/handler/focus"
+	user "zerogorm/internal/handler/user"
 	"zerogorm/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
@@ -39,5 +40,31 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 		},
 		rest.WithPrefix("/api/focus"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/addUser",
+				Handler: user.AddUserHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodDelete,
+				Path:    "/deleteUser",
+				Handler: user.DeleteUserHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/getUserById",
+				Handler: user.GetUserByIdHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/updateUser",
+				Handler: user.UpdateUserHandler(serverCtx),
+			},
+		},
+		rest.WithPrefix("/api/user"),
 	)
 }

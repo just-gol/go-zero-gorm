@@ -14,8 +14,8 @@ type (
 )
 
 @server (
-	group:  "focus"
-	prefix: "/api/focus"
+	group:  focus
+	prefix: /api/focus
 )
 service zerogorm-api {
 	@handler GetFocus

@@ -1,0 +1,43 @@
+syntax = "v1"
+
+type (
+	User {
+		Id       int    `json:"id"`
+		Username string `json:"username"`
+		Age      int    `json:"age"`
+		Email    string `json:"email"`
+	}
+	UserRequest {
+		Id int `form:"id"`
+	}
+	AddUserRequest {
+		Username string `json:"username"`
+		Age      int    `json:"age"`
+		Email    string `json:"email"`
+	}
+	UpdateUserRequest {
+		Id       int    `json:"id"`
+		Username string `json:"username,optional"`
+		Age      int    `json:"age,optional"`
+		Email    string `json:"email,optional"`
+	}
+)
+
+@server (
+	prefix: /api/user
+	group:  user
+)
+service zerogorm-api {
+	@handler GetUserById
+	get /getUserById (UserRequest) returns (CommonResponse)
+
+	@handler AddUser
+	post /addUser (AddUserRequest) returns (CommonResponse)
+
+	@handler UpdateUser
+	post /updateUser (UpdateUserRequest) returns (CommonResponse)
+
+	@handler DeleteUser
+	delete /deleteUser (UserRequest) returns (CommonResponse)
+}
+
